@@ -12,7 +12,7 @@ class ElectionController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

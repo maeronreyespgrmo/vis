@@ -11,8 +11,8 @@
     <a class="nav-link" data-toggle="dropdown" href="#">{{ Auth::user()->full_name }} <i class="fas fa-user-cog"></i><i class="fas fa-angle-down"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-      <div class="dropdown-divider"></div>
-        <a href="/auth/change-password" class="dropdown-item dropdown-footer">Change Password</a>
+      <!-- <div class="dropdown-divider"></div>
+        <a href="/auth/change-password" class="dropdown-item dropdown-footer">Change Password</a> -->
       <div class="dropdown-divider"></div>
         <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

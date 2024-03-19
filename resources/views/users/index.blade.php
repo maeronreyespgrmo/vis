@@ -16,6 +16,7 @@
         <tr>
           <th>Full Name</th>
           <th>Email</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -23,6 +24,7 @@
         <tr>
           <td>{{ $user->name }}</td>
           <td>{{ $user->email }}</td>
+          <td><a class="btn btn-primary" href="/users/{{$user->id}}/edit">Edit</a> <a class="btn btn-danger" href="/users/{{$user->id}}/destroy">Delete</a></td>
         </tr>
         @endforeach
       </tbody>

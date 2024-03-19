@@ -30,7 +30,7 @@
                             @foreach($boardOfDirectors as $boardOfDirector)
                             <tr>                                
                                 <td>{{$boardOfDirector->name}}</td>
-                                <td><span id="vote-{{$boardOfDirector->id}}"></span></td>
+                                <td><span>{{$boardOfDirector->count_id}}</span></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -53,7 +53,7 @@
                             @foreach($electionCommittees as $electionCommittee)
                             <tr>                                
                                 <td>{{$electionCommittee->name}}</td>
-                                <td><span id="vote-{{$electionCommittee->id}}"></span></td>
+                                <td><span>{{$electionCommittee->count_id}}</span></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -74,7 +74,7 @@
                             @foreach($auditCommittees as $auditCommittee)
                             <tr>                                
                                 <td>{{$auditCommittee->name}}</td>
-                                <td><span id="vote-{{$auditCommittee->id}}"></span></td>
+                                <td><span>{{$auditCommittee->count_id}}</span></td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tbl_votes', function (Blueprint $table) {
+        Schema::create('tbl_positions', function (Blueprint $table) {
             $table->id();
-            $table->string('ballot_id');
-            $table->integer('candidate_id');
+            $table->string('name')->unique();
+            $table->smallInteger('limit');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tbl_votes');
+        Schema::dropIfExists('position');
     }
 };

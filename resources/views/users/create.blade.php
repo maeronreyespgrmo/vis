@@ -21,7 +21,7 @@
             <div class="col-sm-12">
               <div class="form-group">
                 <label for="full_name">Full Name *</label>
-                <input type="text" class="form-control" name="full_name" placeholder="Full Name" value="{{ old('full_name') }}" required>
+                <input type="text" class="form-control" name="name" placeholder="Full Name" value="{{ old('full_name') }}" required>
               </div>
             </div>
           </div>
@@ -31,13 +31,13 @@
               <label for="username">Email *</label>
               <input type="email" class="form-control" name="email" placeholder="Email" required value="{{ old('email') }}">
             </div>
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
               <label for="user_type">User Type *</label>
                 <select class="form-control select2" name="user_type" style="width: 100%;" required>
                   <option selected></option>
                   <option value="1">Overall Administrator</option>
                 </select>
-              </div>
+              </div> -->
           </div>
           <div class="form-group row">
             <div class="col-sm-6">

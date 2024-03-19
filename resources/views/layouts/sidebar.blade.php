@@ -10,6 +10,12 @@
       </a>
     </li>
     <li class="nav-item">
+      <a href="{{ route('votes') }}" class="nav-link {{ ($page['parent'] == 'votes') ? 'active' : '' }}">
+        <i class="nav-icon fas fa-vote-yea"></i>
+        <p>Vote Management</p>
+      </a>
+    </li>
+    <li class="nav-item">
       <a href="{{ route('candidates') }}" class="nav-link {{ ($page['parent'] == 'candidates') ? 'active' : '' }}">
         <i class="nav-icon fas fa-fingerprint"></i>
         <p>Candidate Management</p>
