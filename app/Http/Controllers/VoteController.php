@@ -22,7 +22,9 @@ class VoteController extends Controller
                 'tb1.election_id',
                 DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
             ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 1) tb1'));
-        })->get();
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
 
         $electionCommittees = DB::table(function($query) {
             $query->select([
@@ -31,7 +33,9 @@ class VoteController extends Controller
                 'tb1.election_id',
                 DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
             ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 2) tb1'));
-        })->get();
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
 
 
         $auditCommittees = DB::table(function($query) {
@@ -41,7 +45,9 @@ class VoteController extends Controller
                 'tb1.election_id',
                 DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
             ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 3) tb1'));
-        })->get();
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
         return view('welcome', compact(
          'boardOfDirectors', 'electionCommittees', 'auditCommittees'
         ));
@@ -72,12 +78,18 @@ class VoteController extends Controller
     public function create()
     {
         //
+        $page = [
+            'parent' => 'vote',
+            'child'  => '',
+            'title'  => 'Vote Management',
+            'crumb'  => 'Vote'
+        ];
         $boardOfDirectors   = Candidate::where('election_id', 1)->get();
         $electionCommittees = Candidate::where('election_id', 2)->get();
         $auditCommittees    = Candidate::where('election_id', 3)->get();
 
         return view('votes.create', compact(
-            'boardOfDirectors', 'electionCommittees', 'auditCommittees'
+            'page','boardOfDirectors', 'electionCommittees', 'auditCommittees'
         ));
     }
 
@@ -86,14 +98,40 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        $array_set =array_merge($request->board_directors,$request->election_committee,$request->audit_committee);
-        foreach($array_set as $item){
-            $vote = new Vote();
-            $vote->candidate_id = $item;
-            $vote->ballot_id = $request->ballot_id;
-            $vote->save();
+        if ($request->board_directors) {
+            if(count($request->board_directors) <= 3) {
+                foreach($request->board_directors as $board_directors){
+                    $vote = new Vote();
+                    $vote->candidate_id = $board_directors;
+                    $vote->ballot_id = $request->ballot_id;
+                    $vote->save();
+                }
+            }
         }
-        return back()->with('success', 'Successfuly added');
+
+        if ($request->election_committee) {
+            if(count($request->election_committee) <= 3) {
+                foreach($request->election_committee as $election_committee){
+                    $vote = new Vote();
+                    $vote->candidate_id = $election_committee;
+                    $vote->ballot_id = $request->ballot_id;
+                    $vote->save();
+                }
+            }
+        }
+
+        if ($request->audit_committee) {
+            if(count($request->audit_committee) <= 3) {
+                foreach($request->audit_committee as $audit_committee){
+                    $vote = new Vote();
+                    $vote->candidate_id = $audit_committee;
+                    $vote->ballot_id = $request->ballot_id;
+                    $vote->save();
+                }
+            }
+        }
+        
+        return back()->with('success', 'Successfully added');
     }
 
     /**
@@ -107,28 +145,76 @@ class VoteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Vote $vote)
+    public function edit($id)
     {
         //
+        $page = [
+            'parent' => 'vote',
+            'child'  => '',
+            'title'  => 'Vote Management',
+            'crumb'  => 'Vote'
+        ];
+
+        $vote = Vote::where('ballot_id', $id)->get();
+
+        $boardOfDirectors   = Candidate::where('election_id', 1)->get();
+        $electionCommittees = Candidate::where('election_id', 2)->get();
+        $auditCommittees    = Candidate::where('election_id', 3)->get();
+
+        return view('votes.edit', compact(
+            'page','boardOfDirectors', 'electionCommittees', 'auditCommittees','vote'
+        ));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Vote $vote)
+    public function update(Request $request, $id)
     {
         //
+        DB::table('tbl_votes')->where('ballot_id', '=', $id)->delete();
+        if ($request->board_directors) {
+            if(count($request->board_directors) <= 3) {
+                foreach($request->board_directors as $board_directors){
+                    $vote = new Vote();
+                    $vote->candidate_id = $board_directors;
+                    $vote->ballot_id = $id;
+                    $vote->save();
+                }
+            }
+        }
+
+        if ($request->election_committee) {
+            if(count($request->election_committee) <= 3) {
+                foreach($request->election_committee as $election_committee){
+                    $vote = new Vote();
+                    $vote->candidate_id = $election_committee;
+                    $vote->ballot_id = $id;
+                    $vote->save();
+                }
+            }
+        }
+
+        if ($request->audit_committee) {
+            if(count($request->audit_committee) <= 3) {
+                foreach($request->audit_committee as $audit_committee){
+                    $vote = new Vote();
+                    $vote->candidate_id = $audit_committee;
+                    $vote->ballot_id = $id;
+                    $vote->save();
+                }
+            }
+        }
+        
+        return back()->with('success', 'Successfully added');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Vote $vote)
-    {
-        //
-        $candidate = Candidate::find($id);
-        $candidate->deleted_at = Carbon::now('Asia/Manila');
-        $candidate->save();
+    public function destroy($id)
+    {   
+        DB::table('tbl_votes')->where('ballot_id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfull');
     }
 }

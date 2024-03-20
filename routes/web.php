@@ -26,6 +26,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/votes/store', [Controllers\VoteController::class, 'store']);
     Route::get('/votes/{candidate}/edit', [Controllers\VoteController::class, 'edit']);
     Route::post('/votes/{candidate}/update', [Controllers\VoteController::class, 'update']);
+    Route::get('/votes/{candidate}/destroy', [Controllers\VoteController::class, 'destroy']);
 
     // Candidate
     Route::get('/candidates', [Controllers\CandidateController::class, 'index'])->name('candidates');
