@@ -107,6 +107,9 @@ class VoteController extends Controller
                     $vote->save();
                 }
             }
+            else{
+                   return redirect("/votes/create")->withErrors("Void Board of Directors");  
+            }
         }
 
         if ($request->election_committee) {
@@ -117,6 +120,9 @@ class VoteController extends Controller
                     $vote->ballot_id = $request->ballot_id;
                     $vote->save();
                 }
+            }
+            else{
+                 return redirect("/votes/create")->withErrors("Void Board of Directors");  
             }
         }
 
@@ -129,8 +135,12 @@ class VoteController extends Controller
                     $vote->save();
                 }
             }
+            else{
+                  return redirect("/votes/create")->withErrors("Void Board of Directors");  
+            }
         }
-        
+
+        // return redirect("/votes/create")->withErrors("Void");
         return back()->with('success', 'Successfully added');
     }
 
@@ -216,5 +226,46 @@ class VoteController extends Controller
     {   
         DB::table('tbl_votes')->where('ballot_id', '=', $id)->delete();
         return redirect()->back()->with('success', 'Deleted Successfull');
+    }
+
+    public function reports()
+    { 
+        $boardOfDirectors = DB::table(function($query) {
+            $query->select([
+                'tb1.id',
+                'tb1.name',
+                'tb1.election_id',
+                DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
+            ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 1) tb1'));
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
+
+        $electionCommittees = DB::table(function($query) {
+            $query->select([
+                'tb1.id',
+                'tb1.name',
+                'tb1.election_id',
+                DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
+            ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 2) tb1'));
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
+
+
+        $auditCommittees = DB::table(function($query) {
+            $query->select([
+                'tb1.id',
+                'tb1.name',
+                'tb1.election_id',
+                DB::raw('(SELECT COUNT(candidate_id) FROM tbl_votes WHERE candidate_id = tb1.id) AS count_id')
+            ])->from(DB::raw('(SELECT id, name, election_id FROM tbl_candidates WHERE election_id = 3) tb1'));
+        })
+        ->orderBy('count_id', 'desc')
+        ->get();
+
+        return view('reports.index',compact(
+            'boardOfDirectors', 'electionCommittees', 'auditCommittees'
+           ));
     }
 }

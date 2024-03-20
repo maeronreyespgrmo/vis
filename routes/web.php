@@ -43,4 +43,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/users/{user}/edit', [Controllers\UserController::class, 'edit']);
     Route::post('/users/{user}/update', [Controllers\UserController::class, 'update']);
     Route::get('/users/{user}/destroy', [Controllers\UserController::class, 'destroy']);
+
+    //Reports
+    Route::get('/reports', [Controllers\VoteController::class, 'reports']);
+    
 });
