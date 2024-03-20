@@ -5,7 +5,7 @@
 @section('content')
 
 @include('layouts.alert')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
 <div class="card card-derel">
   <div class="card-header">
     <a href="/votes/create" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>ADD VOTE</a>
@@ -31,9 +31,9 @@
   </div>
   <div class="card-footer"></div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/jquery.min.js"></script>
 <!-- DataTables JavaScript -->
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
 <script>
 $(document).ready(function() {
     $('#example').DataTable();

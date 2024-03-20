@@ -67,7 +67,6 @@ display: block;
 
 }
 
-
 .center-div{
 display: block;
 padding: 20px;
@@ -112,7 +111,7 @@ right: 0px;
 <div class="container center-div">
 <header>
 <center>
- <img src="./images/header_lemco.png"/>
+ <img src="./images/header_lemco.png" width="850" height="210">
 </center>
 </header>
 
@@ -122,7 +121,7 @@ right: 0px;
             <div class="col-md-12">
            
                 <h2> BOARD OF DIRECTORS </h2>
-                    <table class="table table-bordered enlarged-table" border=1>
+                    <table style=" border-collapse: collapse;" class="table table-bordered enlarged-table" border=1>
                         <thead>
                             <tr>
                                 <th style="text-align:center">CANDIDATE</th>
@@ -155,7 +154,7 @@ right: 0px;
 
             <div class="col-md-12">
                 <h2> ELECTION COMMITTEE </h2>
-                    <table class="table table-bordered enlarged-table " border=1>
+                    <table style=" border-collapse: collapse;" class="table table-bordered enlarged-table " border=1>
                         <thead>
                         <tr>
                             <th style="text-align:center">CANDIDATE</th>
@@ -185,7 +184,7 @@ right: 0px;
             <div class="col-md-4 bottom">
        
                 <h2> AUDIT COMMITTEE </h2>
-                    <table class="table table-bordered enlarged-table" border=1>
+                    <table style=" border-collapse: collapse;" class="table table-bordered enlarged-table" border=1>
                         <thead>
                         <tr>
                             <th style="text-align:center">CANDIDATE</th>
@@ -219,11 +218,13 @@ right: 0px;
             <table style="width: 100%;margin-left:10%">
                 <tr>
                     <td style="width: 50%">
+                    <hr style="width:70%;margin-left:-65px;background-color:black;"></hr>
                         <p><b>JUAN P. ABIO</b></p>
                         <p><b>MEMBER</b></p>
                     </td>
        
                     <td>
+                    <hr style="width:80%;margin-left:-45px;background-color:black;"></hr>
                         <p><b>AMORSOLO E. CARIÑO</b></p>
                         <p><b>VICE-CHAIRPERSON</b></p>
                     </td>
@@ -238,7 +239,9 @@ right: 0px;
             <table style="width: 100%;margin-left:30%">
                 <tr>
                     <td>
-                    <p> <b> RONALD R. MINALABAG</b></p>
+                    
+                    <p> <b>    
+                <hr style="width:50%;margin-left:-65px;background-color:black;"></hr> RONALD R. MINALABAG</b></p>
                         <p><b>ELECOM Chairperson</b></p>
                     </td>
                 </tr>

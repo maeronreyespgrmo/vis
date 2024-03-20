@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {{-- Theme style --}}
         <link rel="stylesheet" href="/vendor/AdminLTE/dist/css/adminlte.min.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+        <link href="/vendor/AdminLTE/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
         <style type="text/css">
             table {
                 border: 1px black;
