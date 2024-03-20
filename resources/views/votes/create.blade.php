@@ -35,7 +35,9 @@
         <tbody>
         @foreach ($boardOfDirectors as $board_directors_item)
         <tr>
-        <td style="font-size:20px"><input type="checkbox" name="board_directors[]" value="{{$board_directors_item->id}}"> {{ $board_directors_item->name }} </td>
+        <td style="font-size:30px">
+        <input type="checkbox" name="board_directors[]" value="{{$board_directors_item->id}}"> {{ $board_directors_item->name }} 
+      </td>
         </tr>
         <!-- Add more fields as needed -->
         @endforeach
@@ -56,7 +58,7 @@
         <tbody>
           @foreach ($electionCommittees as $election_committee_item)
           <tr>
-          <td style="font-size:20px"><input type="checkbox" name="election_committee[]" value="{{$election_committee_item->id}}"> {{ $election_committee_item->name }} </td>
+          <td style="font-size:30px"><input type="checkbox" name="election_committee[]" value="{{$election_committee_item->id}}"> {{ $election_committee_item->name }} </td>
           </tr>
           <!-- Add more fields as needed -->
           @endforeach
@@ -77,7 +79,7 @@
         <tbody>
         @foreach ($auditCommittees as $audit_committee_item)
           <tr>
-          <td style="font-size:20px"><input type="checkbox" name="audit_committee[]" value="{{$audit_committee_item->id}}"> {{ $audit_committee_item->name }} </td>
+          <td style="font-size:30px"><input type="checkbox" name="audit_committee[]" value="{{$audit_committee_item->id}}"> {{ $audit_committee_item->name }} </td>
           </tr>
           <!-- Add more fields as needed -->
           @endforeach

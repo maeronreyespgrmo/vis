@@ -101,10 +101,17 @@ class VoteController extends Controller
         if ($request->board_directors) {
             if(count($request->board_directors) <= 3) {
                 foreach($request->board_directors as $board_directors){
-                    $vote = new Vote();
-                    $vote->candidate_id = $board_directors;
-                    $vote->ballot_id = $request->ballot_id;
-                    $vote->save();
+                    DB::beginTransaction();
+                    try {
+                        $vote = new Vote();
+                        $vote->candidate_id = $board_directors;
+                        $vote->ballot_id = $request->ballot_id;
+                        $vote->save();
+                    DB::commit();
+                    } catch (\Exception $th) {
+                    DB::rollBack();
+                    return redirect("/votes/create")->withErrors($th->getMessage());
+                    }
                 }
             }
             else{
@@ -115,10 +122,17 @@ class VoteController extends Controller
         if ($request->election_committee) {
             if(count($request->election_committee) <= 3) {
                 foreach($request->election_committee as $election_committee){
+                    DB::beginTransaction();
+                    try {
                     $vote = new Vote();
                     $vote->candidate_id = $election_committee;
                     $vote->ballot_id = $request->ballot_id;
                     $vote->save();
+                    DB::commit();
+                    } catch (\Exception $th) {
+                    DB::rollBack();
+                    return redirect("/votes/create")->withErrors($th->getMessage());
+                    }
                 }
             }
             else{
@@ -129,10 +143,17 @@ class VoteController extends Controller
         if ($request->audit_committee) {
             if(count($request->audit_committee) <= 3) {
                 foreach($request->audit_committee as $audit_committee){
+                    DB::beginTransaction();
+                    try {
                     $vote = new Vote();
                     $vote->candidate_id = $audit_committee;
                     $vote->ballot_id = $request->ballot_id;
                     $vote->save();
+                    DB::commit();
+                    } catch (\Exception $th) {
+                    DB::rollBack();
+                    return redirect("/votes/create")->withErrors($th->getMessage());
+                    }
                 }
             }
             else{
