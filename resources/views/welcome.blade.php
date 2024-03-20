@@ -121,7 +121,7 @@
         <div class="col-md-12">
         <table>
             <tr>
-                <td>Total of Votes</td>
+                <td><h4><b>Total of Votes: {{$total_votes}}</b></h4></td>
             </tr>
         </table>
         </div>

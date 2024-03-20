@@ -48,8 +48,10 @@ class VoteController extends Controller
         })
         ->orderBy('count_id', 'desc')
         ->get();
+
+        $total_votes = Vote::count();
         return view('welcome', compact(
-         'boardOfDirectors', 'electionCommittees', 'auditCommittees'
+         'boardOfDirectors', 'electionCommittees', 'auditCommittees','total_votes'
         ));
     }
 
