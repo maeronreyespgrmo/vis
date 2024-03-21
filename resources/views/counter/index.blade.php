@@ -10,13 +10,13 @@
   <div class="card-header">
     <i class="fa fa-plus"></i><b> ADD NEW VOTE</b>
   </div>
-  <form action="/votes/store" method="POST">
+  <form action="/counter/store" method="POST">
 @csrf
 <div class="container">
   <br>
 <div class="row">
 <div class="col-md-6">
-<h5>Official Ballot: <input  type="text" name="ballot_id"></h5>
+<h5>Official Ballot: <input  type="text" name="ballot_id" required></h5>
 </div>
 </div>
 </div>
@@ -36,7 +36,8 @@
         @foreach ($boardOfDirectors as $board_directors_item)
         <tr>
         <td style="font-size:30px">
-        <input type="checkbox" name="board_directors[]" value="{{$board_directors_item->id}}"> {{ $board_directors_item->name }} 
+        <button type="submit" name="board_directors[]" value="{{$board_directors_item->id}}">{{ $board_directors_item->name }}</button>
+        <!-- <input type="checkbox" name="board_directors[]" value="{{$board_directors_item->id}}"> {{ $board_directors_item->name }}  -->
       </td>
         </tr>
         <!-- Add more fields as needed -->
@@ -58,7 +59,11 @@
         <tbody>
           @foreach ($electionCommittees as $election_committee_item)
           <tr>
-          <td style="font-size:30px"><input type="checkbox" name="election_committee[]" value="{{$election_committee_item->id}}"> {{ $election_committee_item->name }} </td>
+          <td style="font-size:30px">
+          
+        <button type="submit" name="election_committee[]" value="{{$election_committee_item->id}}">{{ $election_committee_item->name }}</button>
+          <!-- <input type="checkbox" name="election_committee[]" value="{{$election_committee_item->id}}"> {{ $election_committee_item->name }}  -->
+        </td>
           </tr>
           <!-- Add more fields as needed -->
           @endforeach
@@ -79,7 +84,11 @@
         <tbody>
         @foreach ($auditCommittees as $audit_committee_item)
           <tr>
-          <td style="font-size:30px"><input type="checkbox" name="audit_committee[]" value="{{$audit_committee_item->id}}"> {{ $audit_committee_item->name }} </td>
+          <td style="font-size:30px">
+          
+        <button type="submit" name="audit_committee[]" value="{{$audit_committee_item->id}}">{{ $audit_committee_item->name }}</button>
+          <!-- <input type="checkbox" name="audit_committee[]" value="{{$audit_committee_item->id}}"> {{ $audit_committee_item->name }}  -->
+        </td>
           </tr>
           <!-- Add more fields as needed -->
           @endforeach
@@ -89,7 +98,7 @@
    
     </div>
   </div>
-  <button class="btn btn-primary btn-lg btn-block">Submit Vote</button>
+  <!-- <button class="btn btn-primary btn-lg btn-block">Submit Vote</button> -->
   </div>
 
 </form>

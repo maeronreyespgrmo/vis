@@ -46,5 +46,8 @@ Route::middleware(['auth'])->group(function () {
 
     //Reports
     Route::get('/reports', [Controllers\VoteController::class, 'reports']);
+
+    Route::get('/counter/index', [Controllers\CounterController::class, 'index']);
+    Route::post('/counter/store', [Controllers\CounterController::class, 'store']);
     
 });

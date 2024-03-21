@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
 <div class="card card-derel">
   <div class="card-header">
-    <a href="/votes/create" class="btn btn-success btn-sm"><i class="fa fa-plus"></i>ADD VOTE</a>
+    <a href="/votes/create" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> NEW BALLOT</a>
   </div>
   <div class="card-body">
     <table id="example" class="display" style="width:100%">
@@ -29,7 +29,9 @@
       </tbody>
     </table>
   </div>
-  <div class="card-footer"></div>
+  <div class="card-footer">
+    <a href="/reports" class="btn btn-secondary btn-sm" target="_BLANK"><i class="fa fa-print"></i> REPORTS</a>
+  </div>
 </div>
 <script src="/js/jquery.min.js"></script>
 <!-- DataTables JavaScript -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vote;
 use App\Models\Candidate;
+use App\Models\Ballot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -100,71 +101,63 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
+        try {
+
+        $ballot_id = $request->ballot_id;
+
+        if (!$request->ballot_id) {
+            $ballot = new Ballot;
+            $ballot->save();
+            $ballot_id = 'pgl-'.$ballot->id;
+        }
+        
         if ($request->board_directors) {
-            if(count($request->board_directors) <= 3) {
+            if (count($request->board_directors) <= 3) {
                 foreach($request->board_directors as $board_directors){
-                    DB::beginTransaction();
-                    try {
-                        $vote = new Vote();
-                        $vote->candidate_id = $board_directors;
-                        $vote->ballot_id = $request->ballot_id;
-                        $vote->save();
-                    DB::commit();
-                    } catch (\Exception $th) {
-                    DB::rollBack();
-                    return redirect("/votes/create")->withErrors($th->getMessage());
-                    }
+                    $vote = new Vote();
+                    $vote->candidate_id = $board_directors;
+                    $vote->ballot_id = $ballot_id;
+                    $vote->save();
                 }
             }
-            else{
-                   return redirect("/votes/create")->withErrors("Void Board of Directors");  
-            }
+        
         }
 
         if ($request->election_committee) {
-            if(count($request->election_committee) <= 3) {
+            if (count($request->election_committee) <= 3) {
                 foreach($request->election_committee as $election_committee){
-                    DB::beginTransaction();
-                    try {
                     $vote = new Vote();
                     $vote->candidate_id = $election_committee;
-                    $vote->ballot_id = $request->ballot_id;
+                    $vote->ballot_id = $ballot_id;
                     $vote->save();
-                    DB::commit();
-                    } catch (\Exception $th) {
-                    DB::rollBack();
-                    return redirect("/votes/create")->withErrors($th->getMessage());
-                    }
                 }
-            }
-            else{
-                 return redirect("/votes/create")->withErrors("Void Board of Directors");  
             }
         }
 
         if ($request->audit_committee) {
-            if(count($request->audit_committee) <= 3) {
+            if (count($request->audit_committee) <= 3) {
                 foreach($request->audit_committee as $audit_committee){
-                    DB::beginTransaction();
-                    try {
                     $vote = new Vote();
                     $vote->candidate_id = $audit_committee;
-                    $vote->ballot_id = $request->ballot_id;
+                    $vote->ballot_id = $ballot_id;
                     $vote->save();
-                    DB::commit();
-                    } catch (\Exception $th) {
-                    DB::rollBack();
-                    return redirect("/votes/create")->withErrors($th->getMessage());
-                    }
                 }
-            }
-            else{
-                  return redirect("/votes/create")->withErrors("Void Board of Directors");  
             }
         }
 
-        // return redirect("/votes/create")->withErrors("Void");
-        return back()->with('success', 'Successfully added');
+        DB::commit();
+        $result = true;
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return redirect("/votes/create")->withErrors($th->getMessage());
+        }
+
+        if ($result) {
+            return back()->with('success', 'Successfully added');
+        } else {
+            return back()->withErrors('Error occured!');
+        }
     }
 
     /**
